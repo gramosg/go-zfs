@@ -96,12 +96,8 @@ func Init(nodePath string) error {
 	}
 	var err error
 	zfsHandle, err = os.Open(nodePath)
-	if os.IsNotExist(err) {
-		unix.Mknod(nodePath, 666, int(unix.Mkdev(10, 54)))
-	}
-	zfsHandle, err = os.Open(nodePath)
 	if err != nil {
-		return fmt.Errorf("Failed to open or create ZFS device node: %v", err)
+		return fmt.Errorf("Failed to open ZFS device node: %v", err)
 	}
 	return nil
 }
